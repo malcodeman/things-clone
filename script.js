@@ -53,7 +53,7 @@ function renderTask(task_number) {
     task_title = document.createElement("span");
     task_item.id = task_number;
     task_item.classList.add("task-item");
-    task_item.addEventListener("click", deleteTask);
+    task_item.addEventListener("dblclick", deleteTask);
     task_title.classList.add("task-title");
     task_title.textContent = getTask(task_number);
     task_item.appendChild(task_title);
