@@ -66,7 +66,7 @@ body{
 
 .task-title{
 	color: #808080;
-	font: .9rem/1.2 "Roboto";	
+	font: .9rem/1 "Roboto";	
 	margin: 0 6px 0 6px;
 	white-space: nowrap;
     min-width: 0;
