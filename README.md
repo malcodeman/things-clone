@@ -1,3 +1,4 @@
+![Preview image](/assets/preview.png?raw=true)
 # To-Do-List-App
 
 ## Assets
