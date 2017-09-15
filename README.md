@@ -11,7 +11,7 @@ Simple todo app based on local storage.
 * [a Quiet Mind](https://www.artstation.com/artwork/Y20RX)
 
 ### Fonts
-* [Roboto](https://fonts.google.com/specimen/Roboto)
+* [Karla](https://fonts.google.com/specimen/Karla)
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
