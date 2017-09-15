@@ -26,11 +26,11 @@ h2 {
 }
 
 .header-content {
+	color: #fff;
 	display: flex;
 	flex-direction: column;
 	height: 118px;
 	justify-content: flex-end;
-	color: #fff;
 }
 
 .h1 {
@@ -50,48 +50,49 @@ h2 {
 
 .task-item {
 	align-items: center;
-	border-bottom: 1px solid #e6e6e6;
-	color: #3F3F3F;
+	border-bottom: 1px solid #f5f5f5;
+	cursor: default;
 	display: flex;
 	height: 47px;
-	padding-left: 1rem;
-	padding-right: 1rem;
-	cursor: default;
+	padding: 0 1rem 0 1rem;
 }
 
 .task-item:hover {
-	background-color: #e6e6e6;
+	background-color: #f5f5f5;
 }
 
 .task-title {
+	color: #34373d;
 	font: 1rem/1.2 Karla;
-	white-space: nowrap;
 	min-width: 0;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .input-new-task {
-	border: 0;
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+	border-color: solid #f5f5f5;
+	border-width: 0 0 1px 0;
+	color: #34373d;
+	cursor: default;
 	font: 1rem/1.2 Karla;
 	min-height: 48px;
+	outline: 0;
 	padding: 0 1rem 0 1rem;
-	cursor: default;
 }
 
 ::-webkit-input-placeholder {
-	color: #000000;
+	color: rgba(255, 42, 104, 1);
 }
 
 ::-moz-placeholder {
-	color: #000000;
+	color: rgba(255, 42, 104, 1);
 }
 
 :-moz-placeholder {
-	color: #000000;
+	color: rgba(255, 42, 104, 1);
 }
 
 :-ms-input-placeholder {
-	color: #000000;
+	color: rgba(255, 42, 104, 1);
 }
