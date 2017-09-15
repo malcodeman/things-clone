@@ -41,11 +41,15 @@ var deleteTask = function () {
     removeTask(this.id);
     setTaskCounter(Number(getTaskCounter()) - 1);
     document.getElementById("tasks_content").getElementsByClassName("task-item")[this.id].remove();
-    var j = Number(this.id);
+    var j = Number(this.id),
+        i = 0;
     for (j; j < Number(getTaskCounter()) + 1; j += 1) {
         localStorage.setItem("task_" + j, getTask(j + 1));
     }
     removeTask(getTaskCounter());
+    for (i; i < Number(getTaskCounter()); i += 1) {
+        document.getElementById("tasks_content").getElementsByClassName("task-item")[i].id = i;
+    }
     focusInputNewTask();
 };
 
