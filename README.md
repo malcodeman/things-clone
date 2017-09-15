@@ -6,7 +6,9 @@ Simple todo app based on local storage.
 ## Assets
 
 ### Backgrounds
-* [Brickwall](https://www.artstation.com/artwork/Lgd00)
+* [Any Minute Now](https://www.artstation.com/artwork/Lgd00)
+* [Stay](https://www.artstation.com/artwork/JqaJD)
+* [a Quiet Mind](https://www.artstation.com/artwork/Y20RX)
 
 ### Fonts
 * [Roboto](https://fonts.google.com/specimen/Roboto)
