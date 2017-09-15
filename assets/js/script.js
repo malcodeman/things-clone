@@ -1,38 +1,37 @@
-// input_new_task operations
 function focusInputNewTask() {
     "use strict";
     document.getElementById("input_new_task").focus();
 }
-
 function clearInputNewTask() {
     "use strict";
     document.getElementById("input_new_task").value = "";
 }
-// Getters
+
+// Getting local storage items
 function getTask(task_number) {
     "use strict";
     return localStorage.getItem("task_" + task_number);
 }
-
 function getTaskCounter() {
     "use strict";
     return localStorage.getItem("task_counter");
 }
-// Task operations
+
+// Setting and removing local storage items
 function setTask(new_task) {
     "use strict";
     localStorage.setItem("task_" + getTaskCounter(), new_task);
 }
-
 function setTaskCounter(new_counter) {
     "use strict";
     localStorage.setItem("task_counter", new_counter);
 }
-
 function removeTask(task_number) {
     "use strict";
     localStorage.removeItem("task_" + task_number);
 }
+
+// Deletes task if user double clicks on task
 var deleteTask = function () {
     "use strict";
     removeTask(this.id);
@@ -46,6 +45,7 @@ var deleteTask = function () {
     focusInputNewTask();
 };
 
+// Shows task
 function renderTask(task_number) {
     "use strict";
     var task_item, task_title;
@@ -59,6 +59,8 @@ function renderTask(task_number) {
     task_item.appendChild(task_title);
     document.getElementById("tasks_content").appendChild(task_item);
 }
+
+// Adds task if user pressed enter and textfield isnt empty
 var addTask = function (event) {
     "use strict";
     if (event.keyCode === 13 && this.value !== "") {
@@ -69,6 +71,7 @@ var addTask = function (event) {
     }
 };
 
+// Loops through all saved tasks and shows them one by one
 function renderTasks() {
     "use strict";
     var i = 0;
@@ -76,7 +79,8 @@ function renderTasks() {
         renderTask(i);
     }
 }
-// Date operations
+
+// Shows date
 function renderDate() {
     "use strict";
     var month_names, day_names, d;
@@ -85,7 +89,6 @@ function renderDate() {
     d = new Date();
     document.getElementById("date_text").textContent = day_names[d.getDay()] + ",  " + month_names[d.getMonth()] + " " + d.getDate();
 }
-
 function main() {
     "use strict";
     if (getTaskCounter() === null) {
@@ -93,7 +96,7 @@ function main() {
     }
     renderDate();
     renderTasks();
-    document.getElementById("input_new_task").addEventListener("keyup", addTask);
     focusInputNewTask();
+    document.getElementById("input_new_task").addEventListener("keyup", addTask);
 }
 main();
