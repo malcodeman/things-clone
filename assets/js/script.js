@@ -2,6 +2,7 @@ function focusInputNewTask() {
     "use strict";
     document.getElementById("input_new_task").focus();
 }
+
 function clearInputNewTask() {
     "use strict";
     document.getElementById("input_new_task").value = "";
@@ -12,6 +13,7 @@ function getTask(task_number) {
     "use strict";
     return localStorage.getItem("task_" + task_number);
 }
+
 function getTaskCounter() {
     "use strict";
     return localStorage.getItem("task_counter");
@@ -22,10 +24,12 @@ function setTask(new_task) {
     "use strict";
     localStorage.setItem("task_" + getTaskCounter(), new_task);
 }
+
 function setTaskCounter(new_counter) {
     "use strict";
     localStorage.setItem("task_counter", new_counter);
 }
+
 function removeTask(task_number) {
     "use strict";
     localStorage.removeItem("task_" + task_number);
@@ -37,11 +41,11 @@ var deleteTask = function () {
     removeTask(this.id);
     setTaskCounter(Number(getTaskCounter()) - 1);
     document.getElementById("tasks_content").getElementsByClassName("task-item")[this.id].remove();
-    var i = Number(this.id);
-    for (i; i < Number(getTaskCounter()); i += 1) {
-        localStorage.setItem("task_" + i, getTask(i + 1));
-        document.getElementById("tasks_content").getElementsByClassName("task-item")[i].id = i;
+    var j = Number(this.id);
+    for (j; j < Number(getTaskCounter()) + 1; j += 1) {
+        localStorage.setItem("task_" + j, getTask(j + 1));
     }
+    removeTask(getTaskCounter());
     focusInputNewTask();
 };
 
@@ -89,6 +93,7 @@ function renderDate() {
     d = new Date();
     document.getElementById("date_text").textContent = day_names[d.getDay()] + ",  " + month_names[d.getMonth()] + " " + d.getDate();
 }
+
 function main() {
     "use strict";
     if (getTaskCounter() === null) {
