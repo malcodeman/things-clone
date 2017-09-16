@@ -1,4 +1,4 @@
-# To-Do-List-App
+# To-Do List App
 Simple todo app based on local storage.
 
 ![Homepage image](screenshots/homepage.png?raw=true)
