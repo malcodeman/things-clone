@@ -1,5 +1,14 @@
 # To-Do List App
-Simple todo app based on local storage.
+Small and simple todo app based on local storage. 
+
+App is made responsive using [text-overflow](https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow) property on task title.
+
+Not having functions "addTask" and "deleteTask" as function objects causes strict violation.
+[Function declarations](http://shichuan.github.io/javascript-patterns/).
+
+Press enter to save a task.
+
+Double click the task to delete it.
 
 ![Homepage image](screenshots/homepage.png?raw=true)
 
