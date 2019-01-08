@@ -1,3 +1,5 @@
+import { renderDate } from "./date.js";
+
 function focusInputNewTask() {
   document.getElementById("input_new_task").focus();
 }
@@ -80,17 +82,6 @@ function renderTasks() {
   for (i; i < getTaskCounter(); i += 1) {
     renderTask(i);
   }
-}
-
-// Shows date
-function renderDate() {
-  const date = new Date();
-  const day = date.toLocaleDateString("en-us", { weekday: "long" });
-  const month = date.toLocaleDateString("en-us", { month: "long" });
-
-  document.getElementById(
-    "date_text"
-  ).textContent = `${day}, ${month} ${date.getDate()}`;
 }
 
 function main() {
