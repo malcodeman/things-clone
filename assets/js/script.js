@@ -1,4 +1,11 @@
 import { renderDate } from "./date.js";
+import {
+  getTask,
+  getTaskCounter,
+  setTask,
+  setTaskCounter,
+  removeTask
+} from "./localStorage.js";
 
 function focusInputNewTask() {
   document.getElementById("input_new_task").focus();
@@ -6,28 +13,6 @@ function focusInputNewTask() {
 
 function clearInputNewTask() {
   document.getElementById("input_new_task").value = "";
-}
-
-// Getting local storage items
-function getTask(task_number) {
-  return localStorage.getItem("task_" + task_number);
-}
-
-function getTaskCounter() {
-  return localStorage.getItem("task_counter");
-}
-
-// Setting and removing local storage items
-function setTask(new_task) {
-  localStorage.setItem("task_" + getTaskCounter(), new_task);
-}
-
-function setTaskCounter(new_counter) {
-  localStorage.setItem("task_counter", new_counter);
-}
-
-function removeTask(task_number) {
-  localStorage.removeItem("task_" + task_number);
 }
 
 // Deletes task if user double clicks on task
