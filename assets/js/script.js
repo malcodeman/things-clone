@@ -6,6 +6,7 @@ import {
   setTaskCounter,
   removeTask
 } from "./localStorage.js";
+import components from "./components.js";
 
 function focusInputNewTask() {
   document.getElementById("input_new_task").focus();
@@ -39,16 +40,10 @@ var deleteTask = function() {
 
 // Shows task
 function renderTask(task_number) {
-  var task_item, task_title;
-  task_item = document.createElement("div");
-  task_title = document.createElement("span");
-  task_item.id = task_number;
-  task_item.classList.add("task-item");
-  task_item.addEventListener("dblclick", deleteTask);
-  task_title.classList.add("task-title");
-  task_title.textContent = getTask(task_number);
-  task_item.appendChild(task_title);
-  document.getElementById("tasks_content").appendChild(task_item);
+  const task = components.Task(task_number, getTask(task_number));
+  document
+    .getElementById("tasks_content")
+    .insertAdjacentHTML("beforeend", task);
 }
 
 // Adds task if user pressed enter and textfield isnt empty
@@ -63,10 +58,14 @@ var addTask = function(event) {
 
 // Loops through all saved tasks and shows them one by one
 function renderTasks() {
-  var i = 0;
+  let i = 0;
   for (i; i < getTaskCounter(); i += 1) {
     renderTask(i);
   }
+  const tasks = document.getElementsByClassName("task-item");
+  Array.from(tasks).forEach(task => {
+    task.addEventListener("dblclick", deleteTask);
+  });
 }
 
 function main() {
