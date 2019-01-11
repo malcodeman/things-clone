@@ -7,21 +7,17 @@ import {
 } from "./localStorage.js";
 import components from "./components.js";
 
-function focusInputNewTask() {
-  document.getElementById("input_new_task").focus();
-}
-
-function clearInputNewTask() {
-  document.getElementById("input_new_task").value = "";
+function focusInputNewTodo() {
+  document.getElementById("newTodoInput").focus();
 }
 
 // Deletes task if user double clicks on task
-var deleteTask = function() {
+function deleteTask() {
   removeTask(this.id);
   setTaskCounter(Number(getTaskCounter()) - 1);
   document
     .getElementById("tasks_content")
-    .getElementsByClassName("task-item")
+    .getElementsByClassName("task")
     [this.id].remove();
   var j = Number(this.id),
     i = 0;
@@ -30,30 +26,48 @@ var deleteTask = function() {
   }
   removeTask(getTaskCounter());
   for (i; i < Number(getTaskCounter()); i += 1) {
-    document
-      .getElementById("tasks_content")
-      .getElementsByClassName("task-item")[i].id = i;
+    document.getElementById("tasks_content").getElementsByClassName("task")[
+      i
+    ].id = i;
   }
-  focusInputNewTask();
-};
+}
 
 // Shows task
 function renderTask(task_number) {
   const task = components.Task(task_number, getTask(task_number));
+
   document
     .getElementById("tasks_content")
     .insertAdjacentHTML("beforeend", task);
 }
 
 // Adds task if user pressed enter and textfield isnt empty
-var addTask = function(event) {
+function addTask(event) {
   if (event.keyCode === 13 && this.value !== "") {
     setTask(this.value);
-    renderTask(getTaskCounter());
     setTaskCounter(Number(getTaskCounter()) + 1);
-    clearInputNewTask();
+    makeTask(this.value);
   }
-};
+}
+
+function makeTask(value) {
+  const newTodo = document.getElementById("newTodo");
+  const newTodoInput = document.getElementById("newTodoInput");
+
+  newTodo.className = "task";
+  newTodo.removeAttribute("id");
+
+  newTodoInput.readOnly = true;
+  newTodoInput.removeAttribute("placeholder");
+  newTodoInput.removeAttribute("id");
+  newTodoInput.value = value;
+
+  document
+    .getElementById("main")
+    .insertAdjacentHTML("beforeend", components.NewTodo());
+  document.getElementById("newTodoInput").addEventListener("keyup", addTask);
+  document.activeElement.blur();
+}
 
 // Loops through all saved tasks and shows them one by one
 function renderTasks() {
@@ -61,7 +75,7 @@ function renderTasks() {
   for (i; i < getTaskCounter(); i += 1) {
     renderTask(i);
   }
-  const tasks = document.getElementsByClassName("task-item");
+  const tasks = document.getElementsByClassName("task");
   Array.from(tasks).forEach(task => {
     task.addEventListener("dblclick", deleteTask);
   });
@@ -69,7 +83,11 @@ function renderTasks() {
 
 function toggleAddTodo() {
   const newTodo = document.getElementById("newTodo");
-  newTodo.classList.toggle("input-new-task-container-active");
+
+  newTodo.classList.toggle("new-todo-active");
+  if (newTodo.classList.contains("new-todo-active")) {
+    focusInputNewTodo();
+  }
 }
 
 function main() {
@@ -77,10 +95,10 @@ function main() {
     setTaskCounter(0);
   }
   renderTasks();
-  focusInputNewTask();
-  document.getElementById("input_new_task").addEventListener("keyup", addTask);
+  document.getElementById("newTodoInput").addEventListener("keyup", addTask);
   document
     .getElementById("newTodoBtn")
     .addEventListener("click", toggleAddTodo);
 }
+
 main();
