@@ -117,13 +117,24 @@ body {
   opacity: 1;
 }
 
-.checkbox {
-  padding: 0;
-  margin: 0;
+.custom-checkbox {
   margin-right: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-checkbox .checkbox-icon {
   height: 16px;
   width: 16px;
-  cursor: pointer;
+  fill: #73716f;
+}
+
+.custom-checkbox .checkbox-checked-icon {
+  height: 16px;
+  width: 16px;
+  fill: #4faef2;
 }
 
 .new-todo-input {

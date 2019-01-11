@@ -66,7 +66,23 @@ function makeTask(value) {
     .getElementById("main")
     .insertAdjacentHTML("beforeend", components.NewTodo());
   document.getElementById("newTodoInput").addEventListener("keyup", addTask);
+  document
+    .getElementById("newTodo")
+    .childNodes[1].addEventListener("click", checkTask);
   document.activeElement.blur();
+}
+
+function checkTask() {
+  this.classList.toggle("checked");
+  if (this.classList.contains("checked")) {
+    this.innerHTML = "";
+    this.insertAdjacentHTML("beforeend", components.CheckboxChecked());
+    focusInputNewTodo();
+  } else {
+    this.innerHTML = "";
+    this.insertAdjacentHTML("beforeend", components.Checkbox());
+    focusInputNewTodo();
+  }
 }
 
 // Loops through all saved tasks and shows them one by one
@@ -78,6 +94,9 @@ function renderTasks() {
   const tasks = document.getElementsByClassName("task");
   Array.from(tasks).forEach(task => {
     task.addEventListener("dblclick", deleteTask);
+  });
+  Array.from(tasks).forEach(task => {
+    task.childNodes[1].addEventListener("click", checkTask);
   });
 }
 
@@ -95,10 +114,13 @@ function main() {
     setTaskCounter(0);
   }
   renderTasks();
-  document.getElementById("newTodoInput").addEventListener("keyup", addTask);
   document
     .getElementById("newTodoBtn")
     .addEventListener("click", toggleAddTodo);
+  document.getElementById("newTodoInput").addEventListener("keyup", addTask);
+  document
+    .getElementById("newTodo")
+    .childNodes[1].addEventListener("click", checkTask);
 }
 
 main();
