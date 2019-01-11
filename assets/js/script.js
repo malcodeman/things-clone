@@ -1,4 +1,3 @@
-import { renderDate } from "./date.js";
 import {
   getTask,
   getTaskCounter,
@@ -68,21 +67,20 @@ function renderTasks() {
   });
 }
 
-function toggleSidebar() {
-  const app = document.getElementById("app");
-  app.classList.toggle("sidebar-collapse");
+function toggleAddTodo() {
+  const newTodo = document.getElementById("newTodo");
+  newTodo.classList.toggle("input-new-task-container-active");
 }
 
 function main() {
   if (getTaskCounter() === null) {
     setTaskCounter(0);
   }
-  renderDate();
   renderTasks();
   focusInputNewTask();
   document.getElementById("input_new_task").addEventListener("keyup", addTask);
   document
-    .getElementById("toggleSidebarButton")
-    .addEventListener("click", toggleSidebar);
+    .getElementById("newTodoBtn")
+    .addEventListener("click", toggleAddTodo);
 }
 main();

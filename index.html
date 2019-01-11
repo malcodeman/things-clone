@@ -3,73 +3,41 @@
 <link href="assets/css/style.css" rel="stylesheet" />
 <script src="assets/js/script.js" type="module" async></script>
 <div class="app" id="app">
-  <header class="header">
-    <nav class="nav"><a href="#" class="nav-item">To-Do</a></nav>
-  </header>
   <aside class="sidebar" id="sidebar">
     <header class="sidebar-header">
-      <button class="menu-btn" id="toggleSidebarButton">
-        <svg viewBox="0 0 24 24" class="menu-icon">
-          <path d="M0 0h24v24H0z" fill="none" />
-          <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+      <div class="list list-active">
+        <svg class="icon-inbox" viewBox="0 0 24 24">
+          <path
+            d="M19 3H4.99c-1.11 0-1.98.89-1.98 2L3 19c0 1.1.88 2 1.99 2H19c1.1 0 2-.9 2-2V5c0-1.11-.9-2-2-2zm0 12h-4c0 1.66-1.35 3-3 3s-3-1.34-3-3H4.99V5H19v10z"
+          />
+          <path fill="none" d="M0 0h24v24H0V0z" />
         </svg>
-      </button>
+        <span>Inbox</span>
+      </div>
     </header>
-    <div class="lists">
-      <div class="list">
-        <div class="icon-wrapper">
-          <svg viewBox="0 0 24 24" class="sidebar-icon">
-            <path d="M0 0h24v24H0z" fill="none" />
-            <path
-              d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9.95h-2V3.5h2V.55zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.7l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zM20 10.5v2h3v-2h-3zm-8-5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-1 16.95h2V19.5h-2v2.95zm-7.45-3.91l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8z"
-            />
-          </svg>
-        </div>
-        <span class="list-title">My day</span>
-      </div>
-      <div class="list">
-        <div class="icon-wrapper">
-          <svg viewBox="0 0 24 24" class="sidebar-icon">
-            <path d="M0 0h24v24H0z" fill="none" />
-            <path
-              d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-            />
-            <path d="M0 0h24v24H0z" fill="none" />
-          </svg>
-        </div>
-        <span class="list-title">Important</span>
-      </div>
-      <div class="list">
-        <div class="icon-wrapper">
-          <svg viewBox="0 0 24 24" class="add-icon">
-            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
-            <path d="M0 0h24v24H0z" fill="none" />
-          </svg>
-        </div>
-        <input
-          id="input_new_list"
-          class="input-new-list"
-          type="text"
-          placeholder="New list"
-          spellcheck="false"
-          maxlength="260"
-        />
-      </div>
-    </div>
   </aside>
   <main class="main">
-    <header class="tasks-header">
-      <h1 class="list-name">My Day</h1>
-      <span id="date_text" class="date"></span>
-    </header>
-    <div class="tasks"><div id="tasks_content"></div></div>
-    <input
-      id="input_new_task"
-      class="input-new-task"
-      type="text"
-      placeholder="Add a to-do"
-      spellcheck="false"
-      maxlength="260"
-    />
+    <div class="main-content">
+      <header class="list-header"><h1 class="list-name">Inbox</h1></header>
+      <div class="tasks"><div id="tasks_content"></div></div>
+      <div class="input-new-task-container" id="newTodo">
+        <div><input type="checkbox" class="checkbox" /></div>
+        <textarea
+          id="input_new_task"
+          placeholder="New To-Do"
+          rows="1"
+          spellcheck="false"
+          class="textarea"
+        ></textarea>
+      </div>
+    </div>
+    <footer class="list-footer">
+      <button class="footer-btn" id="newTodoBtn">
+        <svg class="icon-add" viewBox="0 0 24 24">
+          <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+          <path d="M0 0h24v24H0z" fill="none" />
+        </svg>
+      </button>
+    </footer>
   </main>
 </div>
