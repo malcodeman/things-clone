@@ -68,6 +68,11 @@ function renderTasks() {
   });
 }
 
+function toggleSidebar() {
+  const app = document.getElementById("app");
+  app.classList.toggle("sidebar-collapse");
+}
+
 function main() {
   if (getTaskCounter() === null) {
     setTaskCounter(0);
@@ -76,5 +81,8 @@ function main() {
   renderTasks();
   focusInputNewTask();
   document.getElementById("input_new_task").addEventListener("keyup", addTask);
+  document
+    .getElementById("toggleSidebarButton")
+    .addEventListener("click", toggleSidebar);
 }
 main();
