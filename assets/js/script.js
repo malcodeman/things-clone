@@ -56,6 +56,8 @@ function makeTask(value) {
 
   newTodo.className = "task";
   newTodo.removeAttribute("id");
+  newTodo.addEventListener("click", selectTask);
+  newTodo.childNodes[1].addEventListener("click", checkTask);
 
   newTodoInput.readOnly = true;
   newTodoInput.removeAttribute("placeholder");
@@ -66,9 +68,6 @@ function makeTask(value) {
     .getElementById("main")
     .insertAdjacentHTML("beforeend", components.NewTodo());
   document.getElementById("newTodoInput").addEventListener("keyup", addTask);
-  document
-    .getElementById("newTodo")
-    .childNodes[1].addEventListener("click", checkTask);
   document.activeElement.blur();
 }
 
@@ -85,6 +84,26 @@ function checkTask() {
   }
 }
 
+function deselectAllTasks() {
+  const tasks = document.getElementsByClassName("task");
+
+  Array.from(tasks).forEach(task => {
+    task.classList.remove("selected");
+  });
+}
+
+function selectTask() {
+  const tasks = document.getElementsByClassName("task");
+
+  Array.from(tasks).forEach(task => {
+    if (this === task) {
+      this.classList.toggle("selected");
+    } else {
+      task.classList.remove("selected");
+    }
+  });
+}
+
 // Loops through all saved tasks and shows them one by one
 function renderTasks() {
   let i = 0;
@@ -94,8 +113,7 @@ function renderTasks() {
   const tasks = document.getElementsByClassName("task");
   Array.from(tasks).forEach(task => {
     task.addEventListener("dblclick", deleteTask);
-  });
-  Array.from(tasks).forEach(task => {
+    task.addEventListener("click", selectTask);
     task.childNodes[1].addEventListener("click", checkTask);
   });
 }
@@ -106,6 +124,7 @@ function toggleAddTodo() {
   newTodo.classList.toggle("new-todo-active");
   if (newTodo.classList.contains("new-todo-active")) {
     focusInputNewTodo();
+    deselectAllTasks();
   }
 }
 
