@@ -71,16 +71,25 @@ function makeTask(value) {
   document.activeElement.blur();
 }
 
+let timerId;
+
 function checkTask() {
   this.classList.toggle("checked");
   if (this.classList.contains("checked")) {
     this.innerHTML = "";
     this.insertAdjacentHTML("beforeend", components.CheckboxChecked());
     focusInputNewTodo();
+    timerId = setTimeout(() => {
+      this.parentNode.classList.add("task-completed");
+      setTimeout(() => {
+        this.parentNode.remove();
+      }, 300);
+    }, 1000);
   } else {
     this.innerHTML = "";
     this.insertAdjacentHTML("beforeend", components.Checkbox());
     focusInputNewTodo();
+    clearTimeout(timerId);
   }
 }
 

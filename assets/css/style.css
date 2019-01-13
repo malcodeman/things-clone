@@ -101,6 +101,11 @@ body {
   align-items: center;
   font-size: 0.8rem;
   border-radius: 2px;
+  transition: opacity 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.task-completed {
+  opacity: 0;
 }
 
 .selected {
