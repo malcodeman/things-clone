@@ -6,6 +6,7 @@ import {
   removeTask
 } from "./localStorage.js";
 import components from "./components.js";
+import keycodes from "./keycodes.js";
 
 function focusInputNewTodo() {
   document.getElementById("newTodoInput").focus();
@@ -43,10 +44,16 @@ function renderTask(task_number) {
 
 // Adds task if user pressed enter and textfield isnt empty
 function addTask(event) {
-  if (event.keyCode === 13 && this.value !== "") {
+  if (
+    (event.keyCode === keycodes.enter.code ||
+      event.keyCode === keycodes.escape.code) &&
+    this.value !== ""
+  ) {
     setTask(this.value);
     setTaskCounter(Number(getTaskCounter()) + 1);
     makeTask(this.value);
+  } else if (event.keyCode === keycodes.escape.code && this.value === "") {
+    toggleAddTodo();
   }
 }
 
@@ -137,6 +144,12 @@ function toggleAddTodo() {
   }
 }
 
+function keyboardShortcuts(e) {
+  if (e.ctrlKey && e.keyCode === keycodes.n.code) {
+    toggleAddTodo();
+  }
+}
+
 function main() {
   if (getTaskCounter() === null) {
     setTaskCounter(0);
@@ -149,6 +162,7 @@ function main() {
   document
     .getElementById("newTodo")
     .childNodes[1].addEventListener("click", checkTask);
+  document.addEventListener("keydown", keyboardShortcuts);
 }
 
 main();
