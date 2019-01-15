@@ -5,6 +5,12 @@ export default {
   escape: {
     code: 27
   },
+  upArrow: {
+    code: 38
+  },
+  downArrow: {
+    code: 40
+  },
   n: {
     code: 78
   }

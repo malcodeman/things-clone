@@ -144,9 +144,47 @@ function toggleAddTodo() {
   }
 }
 
+function selectTaskDownArrowShortcut() {
+  const tasks = document.getElementsByClassName("task");
+
+  for (let i = 0; i < tasks.length; ++i) {
+    if (tasks[i].classList.contains("selected")) {
+      if (i === tasks.length - 1) {
+        return;
+      }
+      tasks[i].classList.remove("selected");
+      tasks[i + 1].classList.add("selected");
+      return;
+    }
+  }
+  tasks[0].classList.add("selected");
+}
+
+function selectTaskUpArrowShortcut() {
+  const tasks = document.getElementsByClassName("task");
+
+  for (let i = 0; i < tasks.length; ++i) {
+    if (tasks[i].classList.contains("selected")) {
+      if (i === 0) {
+        return;
+      }
+      tasks[i].classList.remove("selected");
+      tasks[i - 1].classList.add("selected");
+      return;
+    }
+  }
+  tasks[tasks.length - 1].classList.add("selected");
+}
+
 function keyboardShortcuts(e) {
   if (e.ctrlKey && e.keyCode === keycodes.n.code) {
     toggleAddTodo();
+  } else if (e.keyCode === keycodes.escape.code) {
+    deselectAllTasks();
+  } else if (e.keyCode === keycodes.downArrow.code) {
+    selectTaskDownArrowShortcut();
+  } else if (e.keyCode === keycodes.upArrow.code) {
+    selectTaskUpArrowShortcut();
   }
 }
 
