@@ -53,8 +53,14 @@ function addTask(event) {
     setTaskCounter(Number(getTaskCounter()) + 1);
     makeTask(this.value);
   } else if (event.keyCode === keycodes.escape.code && this.value === "") {
-    toggleAddTodo();
+    closeAddTodo();
   }
+}
+
+function closeAddTodo() {
+  const newTodo = document.getElementById("newTodo");
+
+  newTodo.classList.remove("new-todo-active");
 }
 
 function makeTask(value) {
