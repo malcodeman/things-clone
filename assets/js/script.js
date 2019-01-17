@@ -12,25 +12,14 @@ function focusInputNewTodo() {
   document.getElementById("newTodoInput").focus();
 }
 
-// Deletes task if user double clicks on task
 function deleteTask() {
-  removeTask(this.id);
-  setTaskCounter(Number(getTaskCounter()) - 1);
-  document
-    .getElementById("tasks_content")
-    .getElementsByClassName("task")
-    [this.id].remove();
-  var j = Number(this.id),
-    i = 0;
-  for (j; j < Number(getTaskCounter()) + 1; j += 1) {
-    localStorage.setItem("task_" + j, getTask(j + 1));
-  }
-  removeTask(getTaskCounter());
-  for (i; i < Number(getTaskCounter()); i += 1) {
-    document.getElementById("tasks_content").getElementsByClassName("task")[
-      i
-    ].id = i;
-  }
+  const tasks = document.getElementsByClassName("task");
+
+  Array.from(tasks).forEach(task => {
+    if (task.classList.contains("selected")) {
+      task.remove();
+    }
+  });
 }
 
 // Shows task
@@ -163,7 +152,9 @@ function selectTaskDownArrowShortcut() {
       return;
     }
   }
-  tasks[0].classList.add("selected");
+  if (tasks.length > 0) {
+    tasks[0].classList.add("selected");
+  }
 }
 
 function selectTaskUpArrowShortcut() {
@@ -179,12 +170,16 @@ function selectTaskUpArrowShortcut() {
       return;
     }
   }
-  tasks[tasks.length - 1].classList.add("selected");
+  if (tasks.length > 0) {
+    tasks[tasks.length - 1].classList.add("selected");
+  }
 }
 
 function keyboardShortcuts(e) {
   if (e.ctrlKey && e.keyCode === keycodes.n.code) {
     toggleAddTodo();
+  } else if (e.ctrlKey && e.keyCode === keycodes.d.code) {
+    deleteTask();
   } else if (e.keyCode === keycodes.escape.code) {
     deselectAllTasks();
   } else if (e.keyCode === keycodes.downArrow.code) {
