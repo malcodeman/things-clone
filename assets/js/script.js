@@ -1,10 +1,4 @@
-import {
-  getTask,
-  getTaskCounter,
-  setTask,
-  setTaskCounter,
-  removeTask
-} from "./localStorage.js";
+import localStorage from "./localStorage.js";
 import components from "./components.js";
 import keycodes from "./keycodes.js";
 
@@ -22,15 +16,6 @@ function deleteTask() {
   });
 }
 
-// Shows task
-function renderTask(task_number) {
-  const task = components.Task(task_number, getTask(task_number));
-
-  document
-    .getElementById("tasks_content")
-    .insertAdjacentHTML("beforeend", task);
-}
-
 // Adds task if user pressed enter and textfield isnt empty
 function addTask(event) {
   if (
@@ -38,8 +23,7 @@ function addTask(event) {
       event.keyCode === keycodes.escape.code) &&
     this.value !== ""
   ) {
-    setTask(this.value);
-    setTaskCounter(Number(getTaskCounter()) + 1);
+    localStorage.saveTask({ date: new Date(), value: this.value });
     makeTask(this.value);
   } else if (event.keyCode === keycodes.escape.code && this.value === "") {
     closeAddTodo();
@@ -115,13 +99,18 @@ function selectTask() {
   });
 }
 
-// Loops through all saved tasks and shows them one by one
 function renderTasks() {
-  let i = 0;
-  for (i; i < getTaskCounter(); i += 1) {
-    renderTask(i);
+  const savedTasks = localStorage.getTasks();
+
+  if (savedTasks) {
+    savedTasks.forEach(savedTask => {
+      document
+        .getElementById("tasks_content")
+        .insertAdjacentHTML("beforeend", components.Task(savedTask.value));
+    });
   }
   const tasks = document.getElementsByClassName("task");
+
   Array.from(tasks).forEach(task => {
     task.addEventListener("dblclick", deleteTask);
     task.addEventListener("click", selectTask);
@@ -190,9 +179,6 @@ function keyboardShortcuts(e) {
 }
 
 function main() {
-  if (getTaskCounter() === null) {
-    setTaskCounter(0);
-  }
   renderTasks();
   document
     .getElementById("newTodoBtn")

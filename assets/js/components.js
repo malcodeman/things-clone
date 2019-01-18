@@ -1,5 +1,5 @@
-const Task = (id, text) => `
-  <div class="task" id=${id}>
+const Task = value => `
+  <div class="task">
     <div class="custom-checkbox">
       ${Checkbox()}
     </div>
@@ -8,7 +8,7 @@ const Task = (id, text) => `
       spellcheck="false"
       autocomplete="off"
       readonly="true"
-      value="${text}"
+      value="${value}"
       class="new-todo-input"
     />
   </div>
