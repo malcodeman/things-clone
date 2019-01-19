@@ -189,3 +189,7 @@ body {
   width: 20px;
   height: 20px;
 }
+
+.no-transition {
+  transition: none;
+}

@@ -24,7 +24,8 @@ function addTask(event) {
     this.value !== ""
   ) {
     localStorage.saveTask({ date: new Date(), value: this.value });
-    makeTask(this.value);
+    appendTask(this.value);
+    closeAddTodo();
   } else if (event.keyCode === keycodes.escape.code && this.value === "") {
     closeAddTodo();
   }
@@ -33,27 +34,20 @@ function addTask(event) {
 function closeAddTodo() {
   const newTodo = document.getElementById("newTodo");
 
+  newTodo.classList.add("no-transition");
   newTodo.classList.remove("new-todo-active");
+  document.getElementById("newTodoInput").value = "";
 }
 
-function makeTask(value) {
-  const newTodo = document.getElementById("newTodo");
-  const newTodoInput = document.getElementById("newTodoInput");
+function appendTask(value) {
+  const tasksContent = document.getElementById("tasks_content");
 
-  newTodo.className = "task";
-  newTodo.removeAttribute("id");
-  newTodo.addEventListener("click", selectTask);
-  newTodo.childNodes[1].addEventListener("click", checkTask);
+  tasksContent.insertAdjacentHTML("beforeend", components.Task(value));
+  const lastTask = document.querySelectorAll(".task:last-child")[0];
 
-  newTodoInput.readOnly = true;
-  newTodoInput.removeAttribute("placeholder");
-  newTodoInput.removeAttribute("id");
-  newTodoInput.value = value;
+  lastTask.addEventListener("click", selectTask);
+  lastTask.childNodes[1].addEventListener("click", checkTask);
 
-  document
-    .getElementById("main")
-    .insertAdjacentHTML("beforeend", components.NewTodo());
-  document.getElementById("newTodoInput").addEventListener("keyup", addTask);
   document.activeElement.blur();
 }
 
@@ -121,6 +115,7 @@ function renderTasks() {
 function toggleAddTodo() {
   const newTodo = document.getElementById("newTodo");
 
+  newTodo.classList.remove("no-transition");
   newTodo.classList.toggle("new-todo-active");
   if (newTodo.classList.contains("new-todo-active")) {
     focusInputNewTodo();
