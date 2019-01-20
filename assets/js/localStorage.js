@@ -15,4 +15,11 @@ function getTasks() {
   return JSON.parse(tasks);
 }
 
-export default { saveTask, getTasks };
+function removeTask(id) {
+  const tasks = JSON.parse(localStorage.getItem("tasks"));
+  const filteredTasks = tasks.filter(task => task.id !== Number(id));
+
+  localStorage.setItem("tasks", JSON.stringify(filteredTasks));
+}
+
+export default { saveTask, getTasks, removeTask };

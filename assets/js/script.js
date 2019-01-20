@@ -6,12 +6,13 @@ function focusInputNewTodo() {
   document.getElementById("newTodoInput").focus();
 }
 
-function deleteTask() {
+function removeTask() {
   const tasks = document.getElementsByClassName("task");
 
   Array.from(tasks).forEach(task => {
     if (task.classList.contains("selected")) {
       task.remove();
+      localStorage.removeTask(task.dataset.id);
     }
   });
 }
@@ -23,8 +24,13 @@ function addTask(event) {
       event.keyCode === keycodes.escape.code) &&
     this.value !== ""
   ) {
-    localStorage.saveTask({ date: new Date(), value: this.value });
-    appendTask(this.value);
+    const id = Math.random();
+    localStorage.saveTask({
+      id,
+      date: new Date(),
+      value: this.value
+    });
+    appendTask(id, this.value);
     closeAddTodo();
   } else if (event.keyCode === keycodes.escape.code && this.value === "") {
     closeAddTodo();
@@ -39,10 +45,10 @@ function closeAddTodo() {
   document.getElementById("newTodoInput").value = "";
 }
 
-function appendTask(value) {
+function appendTask(id, value) {
   const tasksContent = document.getElementById("tasks_content");
 
-  tasksContent.insertAdjacentHTML("beforeend", components.Task(value));
+  tasksContent.insertAdjacentHTML("beforeend", components.Task(id, value));
   const lastTask = document.querySelectorAll(".task:last-child")[0];
 
   lastTask.addEventListener("click", selectTask);
@@ -100,13 +106,15 @@ function renderTasks() {
     savedTasks.forEach(savedTask => {
       document
         .getElementById("tasks_content")
-        .insertAdjacentHTML("beforeend", components.Task(savedTask.value));
+        .insertAdjacentHTML(
+          "beforeend",
+          components.Task(savedTask.id, savedTask.value)
+        );
     });
   }
   const tasks = document.getElementsByClassName("task");
 
   Array.from(tasks).forEach(task => {
-    task.addEventListener("dblclick", deleteTask);
     task.addEventListener("click", selectTask);
     task.childNodes[1].addEventListener("click", checkTask);
   });
@@ -163,7 +171,7 @@ function keyboardShortcuts(e) {
   if (e.ctrlKey && e.keyCode === keycodes.n.code) {
     toggleAddTodo();
   } else if (e.ctrlKey && e.keyCode === keycodes.d.code) {
-    deleteTask();
+    removeTask();
   } else if (e.keyCode === keycodes.escape.code) {
     deselectAllTasks();
   } else if (e.keyCode === keycodes.downArrow.code) {

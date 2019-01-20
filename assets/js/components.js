@@ -1,5 +1,5 @@
-const Task = value => `
-  <div class="task">
+const Task = (id, value) => `
+  <div data-id=${id} class="task">
     <div class="custom-checkbox">
       ${Checkbox()}
     </div>
