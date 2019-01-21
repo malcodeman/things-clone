@@ -181,8 +181,19 @@ function keyboardShortcuts(e) {
   }
 }
 
+function toggleNavlink() {
+  const lists = document.getElementsByClassName("list");
+
+  Array.from(lists).forEach(list => {
+    if (list.pathname === window.location.pathname) {
+      list.classList.add("list-active");
+    }
+  });
+}
+
 function main() {
   renderTasks();
+  toggleNavlink();
   document
     .getElementById("newTodoBtn")
     .addEventListener("click", toggleAddTodo);

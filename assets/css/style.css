@@ -50,6 +50,13 @@ body {
   width: 20px;
 }
 
+.icon-logbook {
+  margin-right: 6px;
+  fill: #4d9971;
+  height: 20px;
+  width: 20px;
+}
+
 .list {
   padding: 2px 6px;
   cursor: pointer;
@@ -57,6 +64,7 @@ body {
   display: flex;
   align-items: center;
   font-size: 0.8rem;
+  color: #fff;
 }
 
 .list-active {
