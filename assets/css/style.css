@@ -188,6 +188,14 @@ body {
   border-radius: 2px;
 }
 
+.footer-btn:disabled {
+  cursor: not-allowed;
+}
+
+.footer-btn:disabled > .icon-add {
+  fill: #747270;
+}
+
 .footer-btn:hover {
   border-color: #4a4845;
 }

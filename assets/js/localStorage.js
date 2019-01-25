@@ -10,9 +10,10 @@ function saveTask(newTask) {
 }
 
 function getTasks() {
-  const tasks = localStorage.getItem("tasks");
+  const tasks = JSON.parse(localStorage.getItem("tasks"));
+  const filteredTasks = tasks.filter(task => task.completed === false);
 
-  return JSON.parse(tasks);
+  return filteredTasks;
 }
 
 function removeTask(id) {
@@ -22,4 +23,36 @@ function removeTask(id) {
   localStorage.setItem("tasks", JSON.stringify(filteredTasks));
 }
 
-export default { saveTask, getTasks, removeTask };
+function completeTask(id) {
+  const tasks = JSON.parse(localStorage.getItem("tasks"));
+  const index = tasks.findIndex(task => task.id === Number(id));
+
+  tasks[index].completed = true;
+
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+function uncompleteTask(id) {
+  const tasks = JSON.parse(localStorage.getItem("tasks"));
+  const index = tasks.findIndex(task => task.id === Number(id));
+
+  tasks[index].completed = false;
+
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+function getCompletedTasks() {
+  const tasks = JSON.parse(localStorage.getItem("tasks"));
+  const filteredTasks = tasks.filter(task => task.completed === true);
+
+  return filteredTasks;
+}
+
+export default {
+  saveTask,
+  getTasks,
+  removeTask,
+  completeTask,
+  uncompleteTask,
+  getCompletedTasks
+};

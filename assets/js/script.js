@@ -1,20 +1,10 @@
 import localStorage from "./localStorage.js";
 import components from "./components.js";
 import keycodes from "./keycodes.js";
+import keyboardShortcuts from "./keyboardShortcuts.js";
 
 function focusInputNewTodo() {
   document.getElementById("newTodoInput").focus();
-}
-
-function removeTask() {
-  const tasks = document.getElementsByClassName("task");
-
-  Array.from(tasks).forEach(task => {
-    if (task.classList.contains("selected")) {
-      task.remove();
-      localStorage.removeTask(task.dataset.id);
-    }
-  });
 }
 
 // Adds task if user pressed enter and textfield isnt empty
@@ -28,7 +18,8 @@ function addTask(event) {
     localStorage.saveTask({
       id,
       date: new Date(),
-      value: this.value
+      value: this.value,
+      completed: false
     });
     appendTask(id, this.value);
     closeAddTodo();
@@ -69,6 +60,7 @@ function checkTask() {
       this.parentNode.classList.add("task-completed");
       setTimeout(() => {
         this.parentNode.remove();
+        localStorage.completeTask(this.parentNode.dataset.id);
       }, 300);
     }, 1000);
   } else {
@@ -108,7 +100,7 @@ function renderTasks() {
         .getElementById("tasks_content")
         .insertAdjacentHTML(
           "beforeend",
-          components.Task(savedTask.id, savedTask.value)
+          components.Task(savedTask.id, savedTask.value, false)
         );
     });
   }
@@ -131,53 +123,17 @@ function toggleAddTodo() {
   }
 }
 
-function selectTaskDownArrowShortcut() {
-  const tasks = document.getElementsByClassName("task");
-
-  for (let i = 0; i < tasks.length; ++i) {
-    if (tasks[i].classList.contains("selected")) {
-      if (i === tasks.length - 1) {
-        return;
-      }
-      tasks[i].classList.remove("selected");
-      tasks[i + 1].classList.add("selected");
-      return;
-    }
-  }
-  if (tasks.length > 0) {
-    tasks[0].classList.add("selected");
-  }
-}
-
-function selectTaskUpArrowShortcut() {
-  const tasks = document.getElementsByClassName("task");
-
-  for (let i = 0; i < tasks.length; ++i) {
-    if (tasks[i].classList.contains("selected")) {
-      if (i === 0) {
-        return;
-      }
-      tasks[i].classList.remove("selected");
-      tasks[i - 1].classList.add("selected");
-      return;
-    }
-  }
-  if (tasks.length > 0) {
-    tasks[tasks.length - 1].classList.add("selected");
-  }
-}
-
-function keyboardShortcuts(e) {
+function keyboardShortcutsListeners(e) {
   if (e.ctrlKey && e.keyCode === keycodes.n.code) {
     toggleAddTodo();
-  } else if (e.ctrlKey && e.keyCode === keycodes.d.code) {
-    removeTask();
   } else if (e.keyCode === keycodes.escape.code) {
     deselectAllTasks();
+  } else if (e.ctrlKey && e.keyCode === keycodes.d.code) {
+    keyboardShortcuts.removeTask();
   } else if (e.keyCode === keycodes.downArrow.code) {
-    selectTaskDownArrowShortcut();
+    keyboardShortcuts.selectTaskDownArrowShortcut();
   } else if (e.keyCode === keycodes.upArrow.code) {
-    selectTaskUpArrowShortcut();
+    keyboardShortcuts.selectTaskUpArrowShortcut();
   }
 }
 
@@ -201,7 +157,7 @@ function main() {
   document
     .getElementById("newTodo")
     .childNodes[1].addEventListener("click", checkTask);
-  document.addEventListener("keydown", keyboardShortcuts);
+  document.addEventListener("keydown", keyboardShortcutsListeners);
 }
 
 main();

@@ -1,7 +1,7 @@
-const Task = (id, value) => `
+const Task = (id, value, checked) => `
   <div data-id=${id} class="task">
     <div class="custom-checkbox">
-      ${Checkbox()}
+      ${checked ? CheckboxChecked() : Checkbox()}
     </div>
     <input
       type="text"
