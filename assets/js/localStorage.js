@@ -48,11 +48,19 @@ function getCompletedTasks() {
   return filteredTasks;
 }
 
+function getTaskCounter() {
+  const tasks = JSON.parse(localStorage.getItem("tasks"));
+  const filteredTasks = tasks.filter(task => task.completed === false);
+
+  return filteredTasks.length;
+}
+
 export default {
   saveTask,
   getTasks,
   removeTask,
   completeTask,
   uncompleteTask,
-  getCompletedTasks
+  getCompletedTasks,
+  getTaskCounter
 };

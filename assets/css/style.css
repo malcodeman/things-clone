@@ -71,6 +71,10 @@ body {
   background-color: #413f3c;
 }
 
+.counter {
+  margin-left: auto;
+}
+
 /* Tasks */
 
 .main {

@@ -1,7 +1,7 @@
 <!DOCTYPE html> <meta charset="UTF-8" /> <title>To-Do</title>
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
 <link href="assets/css/style.css" rel="stylesheet" />
-<script src="assets/js/script.js" type="module" async></script>
+<script src="assets/js/inbox.js" type="module" async></script>
 <div class="app" id="app">
   <aside class="sidebar" id="sidebar">
     <header class="sidebar-header">
@@ -12,7 +12,7 @@
           />
           <path fill="none" d="M0 0h24v24H0V0z" />
         </svg>
-        <span>Inbox</span>
+        <span>Inbox</span> <span id="counter" class="counter"></span>
       </a>
     </header>
     <a href="/logbook" class="list">
@@ -36,7 +36,7 @@
         </svg>
         <h1 class="list-name">Inbox</h1>
       </header>
-      <div class="tasks"><div id="tasks_content"></div></div>
+      <div class="tasks"><div id="inbox"></div></div>
       <div class="new-todo" id="newTodo">
         <div class="custom-checkbox">
           <svg class="checkbox-icon" viewBox="0 0 24 24">

@@ -2,6 +2,7 @@ import localStorage from "./localStorage.js";
 import components from "./components.js";
 import keycodes from "./keycodes.js";
 import keyboardShortcuts from "./keyboardShortcuts.js";
+import counter from "./counter.js";
 
 function toggleNavlink() {
   const lists = document.getElementsByClassName("list");
@@ -16,6 +17,7 @@ function toggleNavlink() {
 function uncompleteTask() {
   this.parentNode.remove();
   localStorage.uncompleteTask(this.parentNode.dataset.id);
+  counter.renderCounter();
 }
 
 function selectTask() {
@@ -74,6 +76,7 @@ function keyboardShortcutsListeners(e) {
 function main() {
   renderCompletedTasks();
   toggleNavlink();
+  counter.renderCounter();
   document.addEventListener("keydown", keyboardShortcutsListeners);
 }
 

@@ -2,6 +2,7 @@ import localStorage from "./localStorage.js";
 import components from "./components.js";
 import keycodes from "./keycodes.js";
 import keyboardShortcuts from "./keyboardShortcuts.js";
+import counter from "./counter.js";
 
 function focusInputNewTodo() {
   document.getElementById("newTodoInput").focus();
@@ -23,6 +24,7 @@ function addTask(event) {
     });
     appendTask(id, this.value);
     closeAddTodo();
+    counter.renderCounter();
   } else if (event.keyCode === keycodes.escape.code && this.value === "") {
     closeAddTodo();
   }
@@ -37,23 +39,23 @@ function closeAddTodo() {
 }
 
 function appendTask(id, value) {
-  const tasksContent = document.getElementById("tasks_content");
+  const tasksContent = document.getElementById("inbox");
 
   tasksContent.insertAdjacentHTML("beforeend", components.Task(id, value));
   const lastTask = document.querySelectorAll(".task:last-child")[0];
 
   lastTask.addEventListener("click", selectTask);
-  lastTask.childNodes[1].addEventListener("click", checkTask);
+  lastTask.childNodes[1].addEventListener("click", completeTask);
 
   document.activeElement.blur();
 }
 
 let timerId;
 
-function checkTask() {
+function completeTask() {
   this.classList.toggle("checked");
   if (this.classList.contains("checked")) {
-    this.innerHTML = "";
+    this.textContent = "";
     this.insertAdjacentHTML("beforeend", components.CheckboxChecked());
     focusInputNewTodo();
     timerId = setTimeout(() => {
@@ -61,10 +63,11 @@ function checkTask() {
       setTimeout(() => {
         this.parentNode.remove();
         localStorage.completeTask(this.parentNode.dataset.id);
+        counter.renderCounter();
       }, 300);
     }, 1000);
   } else {
-    this.innerHTML = "";
+    this.textContent = "";
     this.insertAdjacentHTML("beforeend", components.Checkbox());
     focusInputNewTodo();
     clearTimeout(timerId);
@@ -97,7 +100,7 @@ function renderTasks() {
   if (savedTasks) {
     savedTasks.forEach(savedTask => {
       document
-        .getElementById("tasks_content")
+        .getElementById("inbox")
         .insertAdjacentHTML(
           "beforeend",
           components.Task(savedTask.id, savedTask.value, false)
@@ -108,7 +111,7 @@ function renderTasks() {
 
   Array.from(tasks).forEach(task => {
     task.addEventListener("click", selectTask);
-    task.childNodes[1].addEventListener("click", checkTask);
+    task.childNodes[1].addEventListener("click", completeTask);
   });
 }
 
@@ -150,13 +153,14 @@ function toggleNavlink() {
 function main() {
   renderTasks();
   toggleNavlink();
+  counter.renderCounter();
   document
     .getElementById("newTodoBtn")
     .addEventListener("click", toggleAddTodo);
   document.getElementById("newTodoInput").addEventListener("keyup", addTask);
   document
     .getElementById("newTodo")
-    .childNodes[1].addEventListener("click", checkTask);
+    .childNodes[1].addEventListener("click", completeTask);
   document.addEventListener("keydown", keyboardShortcutsListeners);
 }
 

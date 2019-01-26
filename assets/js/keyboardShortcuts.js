@@ -1,4 +1,5 @@
 import localStorage from "./localStorage.js";
+import counter from "./counter.js";
 
 function selectTaskDownArrowShortcut() {
   const tasks = document.getElementsByClassName("task");
@@ -43,6 +44,7 @@ function removeTask() {
     if (task.classList.contains("selected")) {
       task.remove();
       localStorage.removeTask(task.dataset.id);
+      counter.renderCounter();
     }
   });
 }
