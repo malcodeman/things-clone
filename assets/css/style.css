@@ -116,10 +116,6 @@ body {
   transition: opacity 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-.task-completed {
-  opacity: 0;
-}
-
 .selected {
   background-color: #324670;
 }
@@ -147,16 +143,36 @@ body {
   align-items: center;
 }
 
-.custom-checkbox .checkbox-icon {
+.checkbox-icon {
   height: 16px;
   width: 16px;
   fill: #73716f;
 }
 
-.custom-checkbox .checkbox-checked-icon {
+.checkbox-checked-icon {
   height: 16px;
   width: 16px;
   fill: #4faef2;
+}
+
+.custom-checkbox-special {
+  margin-right: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-checkbox-special .checkbox-checked-icon {
+  display: none;
+}
+
+.custom-checkbox-special:hover > .checkbox-checked-icon {
+  display: block;
+}
+
+.custom-checkbox-special:hover > .checkbox-icon {
+  display: none;
 }
 
 .new-todo-input {

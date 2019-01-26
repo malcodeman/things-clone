@@ -50,28 +50,11 @@ function appendTask(id, value) {
   document.activeElement.blur();
 }
 
-let timerId;
-
 function completeTask() {
-  this.classList.toggle("checked");
-  if (this.classList.contains("checked")) {
-    this.textContent = "";
-    this.insertAdjacentHTML("beforeend", components.CheckboxChecked());
-    focusInputNewTodo();
-    timerId = setTimeout(() => {
-      this.parentNode.classList.add("task-completed");
-      setTimeout(() => {
-        this.parentNode.remove();
-        localStorage.completeTask(this.parentNode.dataset.id);
-        counter.renderCounter();
-      }, 300);
-    }, 1000);
-  } else {
-    this.textContent = "";
-    this.insertAdjacentHTML("beforeend", components.Checkbox());
-    focusInputNewTodo();
-    clearTimeout(timerId);
-  }
+  this.parentNode.remove();
+  localStorage.completeTask(this.parentNode.dataset.id);
+  counter.renderCounter();
+  focusInputNewTodo();
 }
 
 function deselectAllTasks() {
@@ -158,9 +141,6 @@ function main() {
     .getElementById("newTodoBtn")
     .addEventListener("click", toggleAddTodo);
   document.getElementById("newTodoInput").addEventListener("keyup", addTask);
-  document
-    .getElementById("newTodo")
-    .childNodes[1].addEventListener("click", completeTask);
   document.addEventListener("keydown", keyboardShortcutsListeners);
 }
 
