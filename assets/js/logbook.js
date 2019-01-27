@@ -65,7 +65,7 @@ function keyboardShortcutsListeners(e) {
   if (e.keyCode === keycodes.escape.code) {
     deselectAllTasks();
   } else if (e.ctrlKey && e.keyCode === keycodes.d.code) {
-    keyboardShortcuts.removeTask();
+    keyboardShortcuts.deleteTask();
   } else if (e.keyCode === keycodes.downArrow.code) {
     keyboardShortcuts.selectTaskDownArrowShortcut();
   } else if (e.keyCode === keycodes.upArrow.code) {

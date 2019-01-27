@@ -20,7 +20,8 @@ function addTask(event) {
       id,
       date: new Date(),
       value: this.value,
-      completed: false
+      completed: false,
+      deleted: false
     });
     appendTask(id, this.value);
     closeAddTodo();
@@ -115,7 +116,7 @@ function keyboardShortcutsListeners(e) {
   } else if (e.keyCode === keycodes.escape.code) {
     deselectAllTasks();
   } else if (e.ctrlKey && e.keyCode === keycodes.d.code) {
-    keyboardShortcuts.removeTask();
+    keyboardShortcuts.deleteTask();
   } else if (e.keyCode === keycodes.downArrow.code) {
     keyboardShortcuts.selectTaskDownArrowShortcut();
   } else if (e.keyCode === keycodes.upArrow.code) {

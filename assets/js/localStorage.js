@@ -11,16 +11,24 @@ function saveTask(newTask) {
 
 function getTasks() {
   const tasks = JSON.parse(localStorage.getItem("tasks"));
-  const filteredTasks = tasks.filter(task => task.completed === false);
 
-  return filteredTasks;
+  if (tasks) {
+    const filteredTasks = tasks.filter(
+      task => task.completed === false && task.deleted === false
+    );
+
+    return filteredTasks;
+  }
+  return null;
 }
 
-function removeTask(id) {
+function deleteTask(id) {
   const tasks = JSON.parse(localStorage.getItem("tasks"));
-  const filteredTasks = tasks.filter(task => task.id !== Number(id));
+  const index = tasks.findIndex(task => task.id === Number(id));
 
-  localStorage.setItem("tasks", JSON.stringify(filteredTasks));
+  tasks[index].deleted = true;
+
+  localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
 function completeTask(id) {
@@ -43,24 +51,59 @@ function uncompleteTask(id) {
 
 function getCompletedTasks() {
   const tasks = JSON.parse(localStorage.getItem("tasks"));
-  const filteredTasks = tasks.filter(task => task.completed === true);
 
-  return filteredTasks;
+  if (tasks) {
+    const filteredTasks = tasks.filter(
+      task => task.completed === true && task.deleted === false
+    );
+
+    return filteredTasks;
+  }
+  return null;
 }
 
 function getTaskCounter() {
   const tasks = JSON.parse(localStorage.getItem("tasks"));
-  const filteredTasks = tasks.filter(task => task.completed === false);
 
-  return filteredTasks.length;
+  if (tasks) {
+    const filteredTasks = tasks.filter(
+      task => task.completed === false && task.deleted === false
+    );
+
+    return filteredTasks.length;
+  }
+  return null;
+}
+
+function getDeletedTasks() {
+  const tasks = JSON.parse(localStorage.getItem("tasks"));
+
+  if (tasks) {
+    const filteredTasks = tasks.filter(task => task.deleted === true);
+
+    return filteredTasks;
+  }
+  return null;
+}
+
+function emptyTrash() {
+  const tasks = JSON.parse(localStorage.getItem("tasks"));
+
+  if (tasks) {
+    const filteredTasks = tasks.filter(task => task.deleted !== true);
+
+    localStorage.setItem("tasks", JSON.stringify(filteredTasks));
+  }
 }
 
 export default {
   saveTask,
   getTasks,
-  removeTask,
+  deleteTask,
   completeTask,
   uncompleteTask,
   getCompletedTasks,
-  getTaskCounter
+  getTaskCounter,
+  getDeletedTasks,
+  emptyTrash
 };

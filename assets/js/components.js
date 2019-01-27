@@ -14,6 +14,22 @@ const Task = (id, value, checked) => `
   </div>
 `;
 
+const ReadOnlyTask = (id, value, checked) => `
+  <div data-id=${id} class="task">
+    <div class="custom-checkbox">
+      ${checked ? CheckboxChecked() : Checkbox()}
+    </div>
+    <input
+      type="text"
+      spellcheck="false"
+      autocomplete="off"
+      readonly="true"
+      value="${value}"
+      class="new-todo-input"
+    />
+  </div>
+`;
+
 const NewTodo = () => `
   <div class="new-todo" id="newTodo">
     <div class="custom-checkbox">
@@ -63,4 +79,4 @@ const Checkboxes = () => `
   </svg>
 `;
 
-export default { Task, NewTodo, Checkbox, CheckboxChecked };
+export default { Task, ReadOnlyTask, NewTodo, Checkbox, CheckboxChecked };

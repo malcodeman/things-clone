@@ -57,6 +57,13 @@ body {
   width: 20px;
 }
 
+.icon-trash {
+  margin-right: 6px;
+  fill: #c3c7cb;
+  height: 20px;
+  width: 20px;
+}
+
 .list {
   padding: 2px 6px;
   cursor: pointer;
@@ -92,14 +99,41 @@ body {
 
 .list-header {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   margin-bottom: 64px;
   padding: 0 10px;
 }
 
-.list-header .icon-inbox {
+.list-title {
+  display: flex;
+  align-items: center;
+}
+
+.list-title .icon-inbox {
   height: 24px;
   width: 24px;
+}
+
+.list-title .icon-logbook {
+  height: 24px;
+  width: 24px;
+}
+
+.list-title .icon-trash {
+  height: 24px;
+  width: 24px;
+}
+
+.empty-trash-btn {
+  margin-top: 24px;
+  background-color: #595755;
+  border-radius: 3px;
+  padding: 2px 6px;
+  color: #fff;
+  font-size: 0.8rem;
+  border: 1px solid transparent;
+  cursor: pointer;
 }
 
 .list-name {

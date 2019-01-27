@@ -37,13 +37,13 @@ function selectTaskUpArrowShortcut() {
   }
 }
 
-function removeTask() {
+function deleteTask() {
   const tasks = document.getElementsByClassName("task");
 
   Array.from(tasks).forEach(task => {
     if (task.classList.contains("selected")) {
       task.remove();
-      localStorage.removeTask(task.dataset.id);
+      localStorage.deleteTask(task.dataset.id);
       counter.renderCounter();
     }
   });
@@ -52,5 +52,5 @@ function removeTask() {
 export default {
   selectTaskDownArrowShortcut,
   selectTaskUpArrowShortcut,
-  removeTask
+  deleteTask
 };
