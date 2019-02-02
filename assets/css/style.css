@@ -24,9 +24,16 @@ body {
 
 .app {
   display: grid;
-  grid-template-areas: "sidebar  main";
-  grid-template-columns: auto 1fr;
+  grid-template-areas: "main";
+  grid-template-columns: 1fr;
   min-height: 100vh;
+}
+
+@media (min-width: 576px) {
+  .app {
+    grid-template-areas: "sidebar  main";
+    grid-template-columns: auto 1fr;
+  }
 }
 
 /* Sidebar */
@@ -37,6 +44,13 @@ body {
   width: 190px;
   color: #fff;
   padding: 16px;
+  display: none;
+}
+
+@media (min-width: 576px) {
+  .sidebar {
+    display: block;
+  }
 }
 
 .sidebar-header {

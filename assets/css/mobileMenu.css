@@ -1,0 +1,76 @@
+.mobile-dropdown {
+  display: flex;
+  justify-content: center;
+}
+
+@media (min-width: 576px) {
+  .mobile-dropdown {
+    display: none;
+  }
+}
+
+.mobile-menu-ref-btn {
+  background-color: transparent;
+  border-radius: 3px;
+  padding: 2px 6px;
+  color: #fff;
+  font-size: 0.8rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.mobile-menu-ref-btn:hover {
+  border-color: #4a4845;
+}
+
+.mobile-menu-icon-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.arrow-down-icon {
+  fill: #b8b7b6;
+  height: 16px;
+  width: 16px;
+}
+
+.mobile-menu {
+  display: none;
+}
+
+.mobile-menu-open {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 300px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  background-color: #2f2d2b;
+  padding: 6px;
+  border-radius: 10px;
+}
+
+.mobile-menu-section {
+  border-bottom: 1px solid #595755;
+  margin: 2px 0;
+}
+
+.mobile-menu-open .list-active {
+  background-color: transparent;
+}
+
+.mobile-menu-open .list:hover {
+  background-color: #3f6db8;
+}
+
+.icon-check {
+  margin-left: 3px;
+  fill: #4faef2;
+  height: 20px;
+  width: 20px;
+}
+
+.pull-right {
+  margin-left: auto;
+}

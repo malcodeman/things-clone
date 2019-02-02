@@ -11,6 +11,18 @@ function renderCounter() {
   }
 }
 
+function renderCounterMobile() {
+  const counterMobile = document.getElementById("counterMobile");
+  const taskCounter = localStorage.getTaskCounter();
+
+  if (taskCounter === 0) {
+    counterMobile.textContent = "";
+  } else {
+    counterMobile.textContent = taskCounter;
+  }
+}
+
 export default {
-  renderCounter
+  renderCounter,
+  renderCounterMobile
 };

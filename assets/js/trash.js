@@ -1,6 +1,7 @@
 import counter from "./counter.js";
 import localStorage from "./localStorage.js";
 import components from "./components.js";
+import mobileMenu from "./mobileMenu.js";
 
 function toggleNavlink() {
   const lists = document.getElementsByClassName("list");
@@ -42,6 +43,8 @@ function main() {
   counter.renderCounter();
   renderDeletedTasks();
   document.getElementById("emptyTrash").addEventListener("click", emptyTrash);
+  const mobileMenuReference = document.getElementById("mobileMenuReference");
+  mobileMenuReference.addEventListener("click", mobileMenu.toggleMenu);
 }
 
 main();

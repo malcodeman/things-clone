@@ -3,6 +3,7 @@ import components from "./components.js";
 import keycodes from "./keycodes.js";
 import keyboardShortcuts from "./keyboardShortcuts.js";
 import counter from "./counter.js";
+import mobileMenu from "./mobileMenu.js";
 
 function focusInputNewTodo() {
   document.getElementById("newTodoInput").focus();
@@ -143,6 +144,8 @@ function main() {
     .addEventListener("click", toggleAddTodo);
   document.getElementById("newTodoInput").addEventListener("keyup", addTask);
   document.addEventListener("keydown", keyboardShortcutsListeners);
+  const mobileMenuReference = document.getElementById("mobileMenuReference");
+  mobileMenuReference.addEventListener("click", mobileMenu.toggleMenu);
 }
 
 main();

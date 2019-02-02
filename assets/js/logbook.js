@@ -3,6 +3,7 @@ import components from "./components.js";
 import keycodes from "./keycodes.js";
 import keyboardShortcuts from "./keyboardShortcuts.js";
 import counter from "./counter.js";
+import mobileMenu from "./mobileMenu.js";
 
 function toggleNavlink() {
   const lists = document.getElementsByClassName("list");
@@ -78,6 +79,8 @@ function main() {
   toggleNavlink();
   counter.renderCounter();
   document.addEventListener("keydown", keyboardShortcutsListeners);
+  const mobileMenuReference = document.getElementById("mobileMenuReference");
+  mobileMenuReference.addEventListener("click", mobileMenu.toggleMenu);
 }
 
 main();
