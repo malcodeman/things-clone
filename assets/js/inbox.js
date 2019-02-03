@@ -9,7 +9,7 @@ function focusInputNewTodo() {
   document.getElementById("newTodoInput").focus();
 }
 
-// Adds task if user pressed enter and textfield isnt empty
+// Adds task if user pressed enter and textfield isn't empty
 function addTask(event) {
   if (
     (event.keyCode === keycodes.enter.code ||
@@ -25,19 +25,11 @@ function addTask(event) {
       deleted: false
     });
     appendTask(id, this.value);
-    closeAddTodo();
+    document.getElementById("newTodoInput").value = "";
     counter.renderCounter();
   } else if (event.keyCode === keycodes.escape.code && this.value === "") {
-    closeAddTodo();
+    document.getElementById("newTodoInput").value = "";
   }
-}
-
-function closeAddTodo() {
-  const newTodo = document.getElementById("newTodo");
-
-  newTodo.classList.add("no-transition");
-  newTodo.classList.remove("new-todo-active");
-  document.getElementById("newTodoInput").value = "";
 }
 
 function appendTask(id, value) {
@@ -48,8 +40,6 @@ function appendTask(id, value) {
 
   lastTask.addEventListener("click", selectTask);
   lastTask.childNodes[1].addEventListener("click", completeTask);
-
-  document.activeElement.blur();
 }
 
 function completeTask() {
@@ -100,21 +90,8 @@ function renderTasks() {
   });
 }
 
-function toggleAddTodo() {
-  const newTodo = document.getElementById("newTodo");
-
-  newTodo.classList.remove("no-transition");
-  newTodo.classList.toggle("new-todo-active");
-  if (newTodo.classList.contains("new-todo-active")) {
-    focusInputNewTodo();
-    deselectAllTasks();
-  }
-}
-
 function keyboardShortcutsListeners(e) {
-  if (e.ctrlKey && e.keyCode === keycodes.n.code) {
-    toggleAddTodo();
-  } else if (e.keyCode === keycodes.escape.code) {
+  if (e.keyCode === keycodes.escape.code) {
     deselectAllTasks();
   } else if (e.ctrlKey && e.keyCode === keycodes.d.code) {
     keyboardShortcuts.deleteTask();
@@ -136,16 +113,16 @@ function toggleNavlink() {
 }
 
 function main() {
+  const newTodoInput = document.getElementById("newTodoInput");
+  const mobileMenuReference = document.getElementById("mobileMenuReference");
+
   renderTasks();
   toggleNavlink();
   counter.renderCounter();
-  document
-    .getElementById("newTodoBtn")
-    .addEventListener("click", toggleAddTodo);
-  document.getElementById("newTodoInput").addEventListener("keyup", addTask);
-  document.addEventListener("keydown", keyboardShortcutsListeners);
-  const mobileMenuReference = document.getElementById("mobileMenuReference");
+  newTodoInput.addEventListener("keyup", addTask);
+  newTodoInput.addEventListener("focus", deselectAllTasks);
   mobileMenuReference.addEventListener("click", mobileMenu.toggleMenu);
+  document.addEventListener("keydown", keyboardShortcutsListeners);
 }
 
 main();

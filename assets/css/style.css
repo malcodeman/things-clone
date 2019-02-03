@@ -102,9 +102,6 @@ body {
   grid-area: main;
   color: #fff;
   background-color: #2e2b28;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 .main-content {
@@ -175,12 +172,6 @@ body {
   align-items: center;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   background-color: #363330;
-  opacity: 0;
-  transition: opacity 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.new-todo-active {
-  opacity: 1;
 }
 
 .custom-checkbox {
@@ -232,48 +223,4 @@ body {
   color: #fff;
   margin: 0;
   cursor: default;
-}
-
-.list-footer {
-  height: 36px;
-  border-top: 1px solid #252220;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.footer-btn {
-  border: 0;
-  padding: 0;
-  background-color: transparent;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  width: 128px;
-  height: 24px;
-  border: 1px solid transparent;
-  border-radius: 2px;
-}
-
-.footer-btn:disabled {
-  cursor: not-allowed;
-}
-
-.footer-btn:disabled > .icon-add {
-  fill: #747270;
-}
-
-.footer-btn:hover {
-  border-color: #4a4845;
-}
-
-.icon-add {
-  fill: #b8b7b6;
-  width: 20px;
-  height: 20px;
-}
-
-.no-transition {
-  transition: none;
 }
