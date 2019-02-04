@@ -3,17 +3,7 @@ import components from "./components.js";
 import keycodes from "./keycodes.js";
 import keyboardShortcuts from "./keyboardShortcuts.js";
 import counter from "./counter.js";
-import mobileMenu from "./mobileMenu.js";
-
-function toggleNavlink() {
-  const lists = document.getElementsByClassName("list");
-
-  Array.from(lists).forEach(list => {
-    if (list.pathname === window.location.pathname) {
-      list.classList.add("list-active");
-    }
-  });
-}
+import menu from "./menu.js";
 
 function uncompleteTask() {
   this.parentNode.remove();
@@ -74,13 +64,18 @@ function keyboardShortcutsListeners(e) {
   }
 }
 
+function addEventListeners() {
+  document.addEventListener("keydown", keyboardShortcutsListeners);
+  document
+    .getElementById("mobileMenuReference")
+    .addEventListener("click", menu.toggleMobileMenu);
+}
+
 function main() {
   renderCompletedTasks();
-  toggleNavlink();
+  addEventListeners();
   counter.renderCounter();
-  document.addEventListener("keydown", keyboardShortcutsListeners);
-  const mobileMenuReference = document.getElementById("mobileMenuReference");
-  mobileMenuReference.addEventListener("click", mobileMenu.toggleMenu);
+  menu.toggleNavlink();
 }
 
 main();

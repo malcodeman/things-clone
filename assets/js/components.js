@@ -9,7 +9,7 @@ const Task = (id, value, checked) => `
       autocomplete="off"
       readonly="true"
       value="${value}"
-      class="new-todo-input"
+      class="todo-input"
     />
   </div>
 `;
@@ -25,23 +25,7 @@ const ReadOnlyTask = (id, value, checked) => `
       autocomplete="off"
       readonly="true"
       value="${value}"
-      class="new-todo-input"
-    />
-  </div>
-`;
-
-const NewTodo = () => `
-  <div class="new-todo" id="newTodo">
-    <div class="custom-checkbox">
-      ${Checkbox()}
-    </div>
-    <input
-      type="text"
-      id="newTodoInput"
-      placeholder="New To-Do"
-      spellcheck="false"
-      autocomplete=off
-      class="new-todo-input"
+      class="todo-input"
     />
   </div>
 `;
@@ -79,4 +63,4 @@ const Checkboxes = () => `
   </svg>
 `;
 
-export default { Task, ReadOnlyTask, NewTodo, Checkbox, CheckboxChecked };
+export default { Task, ReadOnlyTask, Checkbox, CheckboxChecked };

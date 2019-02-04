@@ -3,7 +3,7 @@ import components from "./components.js";
 import keycodes from "./keycodes.js";
 import keyboardShortcuts from "./keyboardShortcuts.js";
 import counter from "./counter.js";
-import mobileMenu from "./mobileMenu.js";
+import menu from "./menu.js";
 
 function focusInputNewTodo() {
   document.getElementById("newTodoInput").focus();
@@ -102,27 +102,22 @@ function keyboardShortcutsListeners(e) {
   }
 }
 
-function toggleNavlink() {
-  const lists = document.getElementsByClassName("list");
+function addEventListeners() {
+  const newTodoInput = document.getElementById("newTodoInput");
 
-  Array.from(lists).forEach(list => {
-    if (list.pathname === window.location.pathname) {
-      list.classList.add("list-active");
-    }
-  });
+  document.addEventListener("keydown", keyboardShortcutsListeners);
+  newTodoInput.addEventListener("keyup", addTask);
+  newTodoInput.addEventListener("focus", deselectAllTasks);
+  document
+    .getElementById("mobileMenuReference")
+    .addEventListener("click", menu.toggleMobileMenu);
 }
 
 function main() {
-  const newTodoInput = document.getElementById("newTodoInput");
-  const mobileMenuReference = document.getElementById("mobileMenuReference");
-
   renderTasks();
-  toggleNavlink();
+  addEventListeners();
   counter.renderCounter();
-  newTodoInput.addEventListener("keyup", addTask);
-  newTodoInput.addEventListener("focus", deselectAllTasks);
-  mobileMenuReference.addEventListener("click", mobileMenu.toggleMenu);
-  document.addEventListener("keydown", keyboardShortcutsListeners);
+  menu.toggleNavlink();
 }
 
 main();

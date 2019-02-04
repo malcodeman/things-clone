@@ -1,17 +1,9 @@
 import counter from "./counter.js";
 import localStorage from "./localStorage.js";
 import components from "./components.js";
-import mobileMenu from "./mobileMenu.js";
-
-function toggleNavlink() {
-  const lists = document.getElementsByClassName("list");
-
-  Array.from(lists).forEach(list => {
-    if (list.pathname === window.location.pathname) {
-      list.classList.add("list-active");
-    }
-  });
-}
+import menu from "./menu.js";
+import keyboardShortcuts from "./keyboardShortcuts.js";
+import keycodes from "./keycodes.js";
 
 function renderDeletedTasks() {
   const deletedTasks = localStorage.getDeletedTasks();
@@ -38,13 +30,25 @@ function emptyTrash() {
   localStorage.emptyTrash();
 }
 
-function main() {
-  toggleNavlink();
-  counter.renderCounter();
-  renderDeletedTasks();
+function keyboardShortcutsListeners(e) {
+  if (e.ctrlKey && e.keyCode === keycodes.d.code) {
+    emptyTrash();
+  }
+}
+
+function addEventListeners() {
+  document.addEventListener("keydown", keyboardShortcutsListeners);
   document.getElementById("emptyTrash").addEventListener("click", emptyTrash);
-  const mobileMenuReference = document.getElementById("mobileMenuReference");
-  mobileMenuReference.addEventListener("click", mobileMenu.toggleMenu);
+  document
+    .getElementById("mobileMenuReference")
+    .addEventListener("click", menu.toggleMobileMenu);
+}
+
+function main() {
+  renderDeletedTasks();
+  addEventListeners();
+  counter.renderCounter();
+  menu.toggleNavlink();
 }
 
 main();
