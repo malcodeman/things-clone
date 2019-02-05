@@ -1,15 +1,14 @@
 import localStorage from "./localStorage.js";
 import components from "./components.js";
 import keycodes from "./keycodes.js";
-import keyboardShortcuts from "./keyboardShortcuts.js";
 import counter from "./counter.js";
 import menu from "./menu.js";
+import tasks from "./tasks.js";
 
 function focusInputNewTodo() {
   document.getElementById("newTodoInput").focus();
 }
 
-// Adds task if user pressed enter and textfield isn't empty
 function addTask(event) {
   if (
     (event.keyCode === keycodes.enter.code ||
@@ -22,7 +21,7 @@ function addTask(event) {
       date: new Date(),
       value: this.value,
       completed: false,
-      deleted: false
+      removed: false
     });
     appendTask(id, this.value);
     document.getElementById("newTodoInput").value = "";
@@ -38,7 +37,7 @@ function appendTask(id, value) {
   tasksContent.insertAdjacentHTML("beforeend", components.Task(id, value));
   const lastTask = document.querySelectorAll(".task:last-child")[0];
 
-  lastTask.addEventListener("click", selectTask);
+  lastTask.addEventListener("click", tasks.select);
   lastTask.childNodes[1].addEventListener("click", completeTask);
 }
 
@@ -47,26 +46,6 @@ function completeTask() {
   localStorage.completeTask(this.parentNode.dataset.id);
   counter.renderCounter();
   focusInputNewTodo();
-}
-
-function deselectAllTasks() {
-  const tasks = document.getElementsByClassName("task");
-
-  Array.from(tasks).forEach(task => {
-    task.classList.remove("selected");
-  });
-}
-
-function selectTask() {
-  const tasks = document.getElementsByClassName("task");
-
-  Array.from(tasks).forEach(task => {
-    if (this === task) {
-      this.classList.toggle("selected");
-    } else {
-      task.classList.remove("selected");
-    }
-  });
 }
 
 function renderTasks() {
@@ -82,23 +61,24 @@ function renderTasks() {
         );
     });
   }
-  const tasks = document.getElementsByClassName("task");
 
-  Array.from(tasks).forEach(task => {
-    task.addEventListener("click", selectTask);
+  const renderedTasks = document.getElementsByClassName("task");
+
+  Array.from(renderedTasks).forEach(task => {
+    task.addEventListener("click", tasks.select);
     task.childNodes[1].addEventListener("click", completeTask);
   });
 }
 
 function keyboardShortcutsListeners(e) {
   if (e.keyCode === keycodes.escape.code) {
-    deselectAllTasks();
+    tasks.deselectAll();
   } else if (e.ctrlKey && e.keyCode === keycodes.d.code) {
-    keyboardShortcuts.deleteTask();
+    tasks.remove();
   } else if (e.keyCode === keycodes.downArrow.code) {
-    keyboardShortcuts.selectTaskDownArrowShortcut();
+    tasks.selectFirst();
   } else if (e.keyCode === keycodes.upArrow.code) {
-    keyboardShortcuts.selectTaskUpArrowShortcut();
+    tasks.selectLast();
   }
 }
 
@@ -107,7 +87,7 @@ function addEventListeners() {
 
   document.addEventListener("keydown", keyboardShortcutsListeners);
   newTodoInput.addEventListener("keyup", addTask);
-  newTodoInput.addEventListener("focus", deselectAllTasks);
+  newTodoInput.addEventListener("focus", tasks.deselectAll);
   document
     .getElementById("mobileMenuReference")
     .addEventListener("click", menu.toggleMobileMenu);

@@ -14,7 +14,7 @@ function getTasks() {
 
   if (tasks) {
     const filteredTasks = tasks.filter(
-      task => task.completed === false && task.deleted === false
+      task => task.completed === false && task.removed === false
     );
 
     return filteredTasks;
@@ -22,11 +22,11 @@ function getTasks() {
   return null;
 }
 
-function deleteTask(id) {
+function removeTask(id) {
   const tasks = JSON.parse(localStorage.getItem("tasks"));
   const index = tasks.findIndex(task => task.id === Number(id));
 
-  tasks[index].deleted = true;
+  tasks[index].removed = true;
 
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
@@ -54,7 +54,7 @@ function getCompletedTasks() {
 
   if (tasks) {
     const filteredTasks = tasks.filter(
-      task => task.completed === true && task.deleted === false
+      task => task.completed === true && task.removed === false
     );
 
     return filteredTasks;
@@ -67,7 +67,7 @@ function getTaskCounter() {
 
   if (tasks) {
     const filteredTasks = tasks.filter(
-      task => task.completed === false && task.deleted === false
+      task => task.completed === false && task.removed === false
     );
 
     return filteredTasks.length;
@@ -75,11 +75,11 @@ function getTaskCounter() {
   return null;
 }
 
-function getDeletedTasks() {
+function getRemovedTasks() {
   const tasks = JSON.parse(localStorage.getItem("tasks"));
 
   if (tasks) {
-    const filteredTasks = tasks.filter(task => task.deleted === true);
+    const filteredTasks = tasks.filter(task => task.removed === true);
 
     return filteredTasks;
   }
@@ -90,7 +90,7 @@ function emptyTrash() {
   const tasks = JSON.parse(localStorage.getItem("tasks"));
 
   if (tasks) {
-    const filteredTasks = tasks.filter(task => task.deleted !== true);
+    const filteredTasks = tasks.filter(task => task.removed !== true);
 
     localStorage.setItem("tasks", JSON.stringify(filteredTasks));
   }
@@ -99,11 +99,11 @@ function emptyTrash() {
 export default {
   saveTask,
   getTasks,
-  deleteTask,
+  removeTask,
   completeTask,
   uncompleteTask,
   getCompletedTasks,
   getTaskCounter,
-  getDeletedTasks,
+  getRemovedTasks,
   emptyTrash
 };

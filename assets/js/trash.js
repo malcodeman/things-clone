@@ -2,21 +2,20 @@ import counter from "./counter.js";
 import localStorage from "./localStorage.js";
 import components from "./components.js";
 import menu from "./menu.js";
-import keyboardShortcuts from "./keyboardShortcuts.js";
 import keycodes from "./keycodes.js";
 
-function renderDeletedTasks() {
-  const deletedTasks = localStorage.getDeletedTasks();
+function renderRemovedTasks() {
+  const removedasks = localStorage.getRemovedTasks();
   const trash = document.getElementById("trash");
 
-  if (deletedTasks) {
-    deletedTasks.forEach(deletedTask => {
+  if (removedasks) {
+    removedasks.forEach(removedTask => {
       trash.insertAdjacentHTML(
         "beforeend",
         components.ReadOnlyTask(
-          deletedTask.id,
-          deletedTask.value,
-          deletedTask.completed
+          removedTask.id,
+          removedTask.value,
+          removedTask.completed
         )
       );
     });
@@ -45,7 +44,7 @@ function addEventListeners() {
 }
 
 function main() {
-  renderDeletedTasks();
+  renderRemovedTasks();
   addEventListeners();
   counter.renderCounter();
   menu.toggleNavlink();

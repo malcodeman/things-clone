@@ -1,7 +1,19 @@
 import localStorage from "./localStorage.js";
 import counter from "./counter.js";
 
-function selectTaskDownArrowShortcut() {
+function select() {
+  const tasks = document.getElementsByClassName("task");
+
+  Array.from(tasks).forEach(task => {
+    if (this === task) {
+      this.classList.toggle("selected");
+    } else {
+      task.classList.remove("selected");
+    }
+  });
+}
+
+function selectFirst() {
   const tasks = document.getElementsByClassName("task");
 
   for (let i = 0; i < tasks.length; ++i) {
@@ -19,7 +31,7 @@ function selectTaskDownArrowShortcut() {
   }
 }
 
-function selectTaskUpArrowShortcut() {
+function selectLast() {
   const tasks = document.getElementsByClassName("task");
 
   for (let i = 0; i < tasks.length; ++i) {
@@ -37,20 +49,30 @@ function selectTaskUpArrowShortcut() {
   }
 }
 
-function deleteTask() {
+function deselectAll() {
+  const tasks = document.getElementsByClassName("task");
+
+  Array.from(tasks).forEach(task => {
+    task.classList.remove("selected");
+  });
+}
+
+function remove() {
   const tasks = document.getElementsByClassName("task");
 
   Array.from(tasks).forEach(task => {
     if (task.classList.contains("selected")) {
       task.remove();
-      localStorage.deleteTask(task.dataset.id);
+      localStorage.removeTask(task.dataset.id);
       counter.renderCounter();
     }
   });
 }
 
 export default {
-  selectTaskDownArrowShortcut,
-  selectTaskUpArrowShortcut,
-  deleteTask
+  select,
+  selectFirst,
+  selectLast,
+  deselectAll,
+  remove
 };
