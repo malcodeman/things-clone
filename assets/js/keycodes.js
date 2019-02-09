@@ -11,6 +11,9 @@ export default {
   downArrow: {
     code: 40
   },
+  a: {
+    code: 65
+  },
   d: {
     code: 68
   },

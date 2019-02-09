@@ -1,12 +1,20 @@
 import localStorage from "./localStorage.js";
 import counter from "./counter.js";
 
-function select() {
-  const tasks = document.getElementsByClassName("task");
+function isSelectedAll() {
+  const tasks = Array.from(document.getElementsByClassName("task"));
 
-  Array.from(tasks).forEach(task => {
+  return tasks.every(task => {
+    return task.classList.contains("selected");
+  });
+}
+
+function select() {
+  const tasks = Array.from(document.getElementsByClassName("task"));
+
+  tasks.forEach(task => {
     if (this === task) {
-      this.classList.toggle("selected");
+      this.classList.add("selected");
     } else {
       task.classList.remove("selected");
     }
@@ -15,6 +23,10 @@ function select() {
 
 function selectFirst() {
   const tasks = document.getElementsByClassName("task");
+
+  if (isSelectedAll()) {
+    deselectAll();
+  }
 
   for (let i = 0; i < tasks.length; ++i) {
     if (tasks[i].classList.contains("selected")) {
@@ -34,6 +46,10 @@ function selectFirst() {
 function selectLast() {
   const tasks = document.getElementsByClassName("task");
 
+  if (isSelectedAll()) {
+    deselectAll();
+  }
+
   for (let i = 0; i < tasks.length; ++i) {
     if (tasks[i].classList.contains("selected")) {
       if (i === 0) {
@@ -49,18 +65,26 @@ function selectLast() {
   }
 }
 
-function deselectAll() {
-  const tasks = document.getElementsByClassName("task");
+function selectAll() {
+  const tasks = Array.from(document.getElementsByClassName("task"));
 
-  Array.from(tasks).forEach(task => {
+  tasks.forEach(task => {
+    task.classList.add("selected");
+  });
+}
+
+function deselectAll() {
+  const tasks = Array.from(document.getElementsByClassName("task"));
+
+  tasks.forEach(task => {
     task.classList.remove("selected");
   });
 }
 
 function remove() {
-  const tasks = document.getElementsByClassName("task");
+  const tasks = Array.from(document.getElementsByClassName("task"));
 
-  Array.from(tasks).forEach(task => {
+  tasks.forEach(task => {
     if (task.classList.contains("selected")) {
       task.remove();
       localStorage.removeTask(task.dataset.id);
@@ -73,6 +97,7 @@ export default {
   select,
   selectFirst,
   selectLast,
+  selectAll,
   deselectAll,
   remove
 };

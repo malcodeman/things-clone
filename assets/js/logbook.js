@@ -38,6 +38,8 @@ function keyboardShortcutsListeners(e) {
     tasks.deselectAll();
   } else if (e.ctrlKey && e.keyCode === keycodes.d.code) {
     tasks.remove();
+  } else if (e.ctrlKey && e.keyCode === keycodes.a.code) {
+    tasks.selectAll();
   } else if (e.keyCode === keycodes.downArrow.code) {
     tasks.selectFirst();
   } else if (e.keyCode === keycodes.upArrow.code) {
