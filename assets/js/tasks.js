@@ -22,46 +22,40 @@ function select() {
 }
 
 function selectFirst() {
-  const tasks = document.getElementsByClassName("task");
+  const tasks = Array.from(document.getElementsByClassName("task"));
 
   if (isSelectedAll()) {
     deselectAll();
   }
 
-  for (let i = 0; i < tasks.length; ++i) {
-    if (tasks[i].classList.contains("selected")) {
-      if (i === tasks.length - 1) {
-        return;
-      }
-      tasks[i].classList.remove("selected");
-      tasks[i + 1].classList.add("selected");
-      return;
-    }
-  }
-  if (tasks.length > 0) {
+  const index = tasks.findIndex(task => {
+    return task.classList.contains("selected");
+  });
+
+  if (index === -1) {
     tasks[0].classList.add("selected");
+  } else if (index !== -1 && index !== tasks.length - 1) {
+    tasks[index].classList.remove("selected");
+    tasks[index + 1].classList.add("selected");
   }
 }
 
 function selectLast() {
-  const tasks = document.getElementsByClassName("task");
+  const tasks = Array.from(document.getElementsByClassName("task"));
 
   if (isSelectedAll()) {
     deselectAll();
   }
 
-  for (let i = 0; i < tasks.length; ++i) {
-    if (tasks[i].classList.contains("selected")) {
-      if (i === 0) {
-        return;
-      }
-      tasks[i].classList.remove("selected");
-      tasks[i - 1].classList.add("selected");
-      return;
-    }
-  }
-  if (tasks.length > 0) {
+  const index = tasks.findIndex(task => {
+    return task.classList.contains("selected");
+  });
+
+  if (index === -1) {
     tasks[tasks.length - 1].classList.add("selected");
+  } else if (index !== -1 && index !== 0) {
+    tasks[index].classList.remove("selected");
+    tasks[index - 1].classList.add("selected");
   }
 }
 
