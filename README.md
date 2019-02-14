@@ -1,26 +1,20 @@
-# To-Do List App
-Small and simple todo app based on local storage. 
+# To-Do List App ✅
 
-App is made responsive using [text-overflow](https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow) property on task title.
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/malcodeman/to-do-list-app/blob/master/LICENSE)
 
-Not having functions "addTask" and "deleteTask" as function objects causes strict violation.
-[Function declarations](http://shichuan.github.io/javascript-patterns/).
+Yet another personal task manager. 😀
 
-Press enter to save a task.
+Made with latest and greatest vanilla js features.
 
-Double click the task to delete it.
+Heavily inspired by [Things 3](https://culturedcode.com/things).
 
-![Homepage image](screenshots/homepage.png?raw=true)
+![Screenshot](docs/images/screenshot.png)
 
 ## Assets
 
-### Backgrounds
-* [Any Minute Now](https://www.artstation.com/artwork/Lgd00)
-* [Stay](https://www.artstation.com/artwork/JqaJD)
-* [a Quiet Mind](https://www.artstation.com/artwork/Y20RX)
-
-### Fonts
-* [Karla](https://fonts.google.com/specimen/Karla)
+- [Roboto font](https://fonts.google.com/specimen/Roboto)
 
 ## License
+
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
